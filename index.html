@@ -2,278 +2,558 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório Semanal — Caixa Única</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        body {
-            background: #f5f5f5;
-            padding: 20px;
-            max-width: 460px;
-            margin: 0 auto;
-        }
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            font-size: 22px;
-            margin-bottom: 15px;
-        }
-        .destaque {
-            background: #fff3cd;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 15px;
-            color: #856404;
-        }
-        .caixa-total {
-            background: #eafaf1;
-            border: 3px solid #27ae60;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .label-total {
-            font-size: 15px;
-            color: #2c3e50;
-            margin-bottom: 8px;
-        }
-        .valor-total {
-            font-size: 28px;
-            font-weight: bold;
-            color: #27ae60;
-        }
-        .linha {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .linha label {
-            font-size: 15px;
-            color: #444;
-        }
-        input {
-            width: 160px;
-            padding: 10px 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            text-align: right;
-        }
-        .rendeu {
-            font-size: 18px;
-            font-weight: bold;
-            color: #e67700;
-        }
-        button {
-            width: 100%;
-            padding: 16px;
-            background: #27ae60;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: 0.2s;
-        }
-        button:hover {
-            background: #219653;
-        }
-        button:active {
-            transform: scale(0.98);
-        }
-        .historico {
-            margin-top: 25px;
-        }
-        .historico h3 {
-            font-size: 16px;
-            color: #444;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #eee;
-        }
-        .item-hist {
-            padding: 10px 12px;
-            border-radius: 6px;
-            margin-bottom: 8px;
-            background: #f8f9fa;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-        .data {
-            color: #666;
-            font-size: 13px;
-        }
-        .vazio {
-            color: #999;
-            text-align: center;
-            padding: 15px;
-            font-size: 14px;
-        }
-        .botoes {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .botoes button:last-child {
-            background: #e74c3c;
-        }
-        .botoes button:last-child:hover {
-            background: #c0392b;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Semanal — Caixa Única</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    padding: 20px;
+    max-width: 460px;
+    margin: 0 auto;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.destaque {
+    background: #fff3cd;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 15px;
+    color: #856404;
+}
+
+.caixa-total {
+    background: #eafaf1;
+    border: 3px solid #27ae60;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.label-total {
+    font-size: 15px;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.valor-total {
+    font-size: 28px;
+    font-weight: bold;
+    color: #27ae60;
+    overflow-wrap: anywhere;
+}
+
+.linha {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.linha label {
+    font-size: 15px;
+    color: #444;
+    flex: 1;
+}
+
+input {
+    width: 160px;
+    min-width: 0;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    text-align: right;
+}
+
+.rendeu {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e67700;
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #219653;
+}
+
+button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.botoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.botoes button:last-child {
+    background: #e74c3c;
+}
+
+.botoes button:last-child:hover {
+    background: #c0392b;
+}
+
+.historico {
+    margin-top: 25px;
+}
+
+.historico h3 {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #eee;
+}
+
+.item-hist {
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    background: #f8f9fa;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.data {
+    color: #666;
+    font-size: 13px;
+}
+
+.vazio {
+    color: #999;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+}
+
+#statusFirebase {
+    text-align: center;
+    font-size: 13px;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 7px;
+    background: #fff3cd;
+    color: #856404;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 360px) {
+    body { padding: 10px; }
+    .card { padding: 16px; }
+    .linha label { font-size: 13px; }
+    input { width: 125px; font-size: 14px; }
+}
+</style>
 </head>
+
 <body>
-    <div class="card">
-        <h1>📋 RELATÓRIO SEMANAL</h1>
-        
-        <div class="destaque">
-            📅 Sexta-Feira: Atualização Semanal — 5,5% ao período
-        </div>
 
-        <!-- CAIXA PRINCIPAL -->
-        <div class="caixa-total">
-            <div class="label-total">💰 SALDO ATUAL</div>
-            <div class="valor-total" id="saldo_total">R$ 0,00</div>
-        </div>
+<div class="card">
 
-        <!-- ENTRADAS DA SEMANA -->
-        <div class="linha">
-            <label>📅 Período</label>
-            <input type="text" id="periodo" placeholder="__/__ a __/__" style="text-align:center;">
-        </div>
-        <div class="linha">
-            <label>➕ Novo valor que entrou (R$)</label>
-            <input type="number" step="0.01" id="novo_valor" placeholder="0,00">
-        </div>
-        <div class="linha">
-            <label>💸 Valor retirado (R$)</label>
-            <input type="number" step="0.01" id="retirado" placeholder="0,00">
-        </div>
-        <div class="linha">
-            <label>📈 Rendeu nesta semana</label>
-            <div class="rendeu" id="rendeu">R$ 0,00</div>
-        </div>
+    <h1>📋 RELATÓRIO SEMANAL</h1>
 
-        <!-- BOTÃO -->
-        <button onclick="atualizar()">➕ ATUALIZAR SEXTA-FEIRA</button>
-        
-        <div class="botoes">
-            <button onclick="limparHistorico()" style="flex:1; font-size:15px; padding:10px;">🗑️ Limpar Histórico</button>
-        </div>
+    <div id="statusFirebase">
+        Aguarde, carregando Firebase...
+    </div>
 
-        <!-- HISTÓRICO -->
-        <div class="historico">
-            <h3>📝 Histórico de Operações</h3>
-            <div id="lista_historico">
-                <div class="vazio">Nenhuma operação ainda</div>
-            </div>
+    <div class="destaque">
+        📅 Sexta-Feira: Atualização Semanal — 5,5% ao período
+    </div>
+
+    <div class="caixa-total">
+        <div class="label-total">💰 SALDO ATUAL</div>
+        <div class="valor-total" id="saldo_total">R$ 0,00</div>
+    </div>
+
+    <div class="linha">
+        <label>📅 Período</label>
+        <input type="text" id="periodo"
+        placeholder="__/__ a __/__"
+        style="text-align:center;">
+    </div>
+
+    <div class="linha">
+        <label>➕ Novo valor que entrou (R$)</label>
+        <input type="number" step="0.01" min="0"
+        id="novo_valor" placeholder="0,00">
+    </div>
+
+    <div class="linha">
+        <label>💸 Valor retirado (R$)</label>
+        <input type="number" step="0.01" min="0"
+        id="retirado" placeholder="0,00">
+    </div>
+
+    <div class="linha">
+        <label>📈 Rendeu nesta semana</label>
+        <div class="rendeu" id="rendeu">R$ 0,00</div>
+    </div>
+
+    <button id="btnAtualizar" onclick="atualizar()" disabled>
+        ➕ ATUALIZAR SEXTA-FEIRA
+    </button>
+
+    <div class="botoes">
+        <button id="btnLimpar" onclick="limparHistorico()"
+        style="flex:1;font-size:15px;padding:10px;" disabled>
+            🗑️ Limpar Histórico
+        </button>
+    </div>
+
+    <div class="historico">
+        <h3>📝 Histórico de Operações</h3>
+        <div id="lista_historico">
+            <div class="vazio">Carregando...</div>
         </div>
     </div>
 
-    <script>
-        // Carrega dados salvos
-        let saldoAtual = parseFloat(localStorage.getItem('saldoAtual')) || 0;
-        let historico = JSON.parse(localStorage.getItem('historico')) || [];
-        
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDsZUHfZ7EBatnMwwR4FKgPWLjZybIm9KI",
+    authDomain: "walker-midia.firebaseapp.com",
+    databaseURL: "https://walker-midia-default-rtdb.firebaseio.com",
+    projectId: "walker-midia",
+    storageBucket: "walker-midia.firebasestorage.app",
+    messagingSenderId: "223143706690",
+    appId: "1:223143706690:web:3c9e81a0d21173a59caddb"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Coleção e documento usados no Firestore
+const documentoCaixa = doc(db, "ideias", "caixa_unica");
+
+let saldoAtual = 0;
+let historico = [];
+let carregado = false;
+let ocupado = false;
+
+const statusFirebase = document.getElementById("statusFirebase");
+const btnAtualizar = document.getElementById("btnAtualizar");
+const btnLimpar = document.getElementById("btnLimpar");
+
+function dinheiro(valor) {
+    return Number(valor || 0).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+}
+
+function mostrarStatus(mensagem, erro = false) {
+    statusFirebase.textContent = mensagem;
+    statusFirebase.style.background = erro ? "#f8d7da" : "#d4edda";
+    statusFirebase.style.color = erro ? "#721c24" : "#155724";
+}
+
+function bloquear(bloqueado) {
+    ocupado = bloqueado;
+    btnAtualizar.disabled = bloqueado || !carregado;
+    btnLimpar.disabled = bloqueado || !carregado;
+}
+
+function atualizarTela() {
+    document.getElementById("saldo_total").textContent =
+        dinheiro(saldoAtual);
+}
+
+function renderizarHistorico() {
+    const lista = document.getElementById("lista_historico");
+
+    lista.innerHTML = "";
+
+    if (historico.length === 0) {
+        lista.innerHTML =
+            '<div class="vazio">Nenhuma operação ainda</div>';
+        return;
+    }
+
+    historico.forEach(op => {
+        const item = document.createElement("div");
+        item.className = "item-hist";
+
+        const data = document.createElement("div");
+        data.className = "data";
+        data.textContent = "📅 " + (op.data || "");
+
+        const periodo = document.createElement("div");
+        periodo.textContent = "Período: " + (op.periodo || "");
+
+        const anterior = document.createElement("div");
+        anterior.textContent = "Saldo anterior: " + dinheiro(op.saldoAnterior);
+
+        const entrada = document.createElement("div");
+        entrada.textContent = "➕ Entrou: " + dinheiro(op.novoValor);
+
+        const lucro = document.createElement("div");
+        lucro.textContent = "📈 Rendeu: " + dinheiro(op.lucro);
+        lucro.style.color = "#e67700";
+
+        const retirada = document.createElement("div");
+        retirada.textContent = "💸 Retirou: " + dinheiro(op.retirado);
+
+        const novoSaldo = document.createElement("div");
+        novoSaldo.textContent = "➡️ Novo saldo: " + dinheiro(op.saldoNovo);
+        novoSaldo.style.color = "#27ae60";
+        novoSaldo.style.fontWeight = "bold";
+
+        item.append(data, periodo, anterior);
+
+        if (Number(op.novoValor) > 0) item.append(entrada);
+
+        item.append(lucro);
+
+        if (Number(op.retirado) > 0) item.append(retirada);
+
+        item.append(novoSaldo);
+        lista.append(item);
+    });
+}
+
+async function salvarFirebase(novoSaldo, novoHistorico) {
+    await setDoc(documentoCaixa, {
+        saldoAtual: novoSaldo,
+        historico: novoHistorico,
+        atualizadoEm: new Date().toISOString()
+    });
+}
+
+async function carregarFirebase() {
+    try {
+        mostrarStatus("Aguarde, carregando Firebase...");
+
+        const snapshot = await getDoc(documentoCaixa);
+
+        if (snapshot.exists()) {
+            const dados = snapshot.data();
+
+            saldoAtual = Number(dados.saldoAtual) || 0;
+            historico = Array.isArray(dados.historico)
+                ? dados.historico
+                : [];
+
+        } else {
+            // Primeira utilização: recupera dados antigos deste navegador.
+            const saldoAntigo =
+                Number(localStorage.getItem("saldoAtual")) || 0;
+
+            let historicoAntigo = [];
+
+            try {
+                historicoAntigo =
+                    JSON.parse(localStorage.getItem("historico")) || [];
+            } catch {
+                historicoAntigo = [];
+            }
+
+            saldoAtual = saldoAntigo;
+            historico = Array.isArray(historicoAntigo)
+                ? historicoAntigo
+                : [];
+
+            // Cria o documento inicial na coleção ideias.
+            await salvarFirebase(saldoAtual, historico);
+        }
+
+        carregado = true;
+
         atualizarTela();
         renderizarHistorico();
 
-        function atualizar() {
-            const periodo = document.getElementById('periodo').placeholder.includes('__') 
-                ? document.getElementById('periodo').value || new Date().toLocaleDateString('pt-BR', { day:'2-digit', month:'2-digit' })
-                : document.getElementById('periodo').value;
-            
-            const novoValor = parseFloat(document.getElementById('novo_valor').value) || 0;
-            const retirado = parseFloat(document.getElementById('retirado').value) || 0;
-            
-            // Cálculo: saldo anterior + novo valor → rende 5,5% → - retirada
-            const baseCalculo = saldoAtual + novoValor;
-            const lucro = baseCalculo * 0.055;
-            const novoSaldo = baseCalculo + lucro - retirado;
-            
-            // Registra operação
-            const operacao = {
-                data: new Date().toLocaleDateString('pt-BR'),
-                periodo: periodo || new Date().toLocaleDateString('pt-BR', { day:'2-digit', month:'2-digit' }),
-                saldoAnterior: saldoAtual,
-                novoValor: novoValor,
-                lucro: lucro,
-                retirado: retirado,
-                saldoNovo: novoSaldo
-            };
-            
-            historico.unshift(operacao);
-            saldoAtual = novoSaldo;
-            
-            // Salva na memória do navegador
-            localStorage.setItem('saldoAtual', saldoAtual);
-            localStorage.setItem('historico', JSON.stringify(historico));
-            
-            // Atualiza tela
-            document.getElementById('rendeu').textContent = 'R$ ' + lucro.toFixed(2).replace('.', ',');
-            atualizarTela();
-            renderizarHistorico();
-            
-            // Limpa os campos para próxima vez
-            document.getElementById('novo_valor').value = '';
-            document.getElementById('retirado').value = '';
-            document.getElementById('periodo').value = '';
-        }
+        bloquear(false);
 
-        function atualizarTela() {
-            document.getElementById('saldo_total').textContent = 
-                'R$ ' + saldoAtual.toFixed(2).replace('.', ',');
-        }
+        mostrarStatus("✓ Firebase conectado! Dados carregados.");
 
-        function renderizarHistorico() {
-            const lista = document.getElementById('lista_historico');
-            if (historico.length === 0) {
-                lista.innerHTML = '<div class="vazio">Nenhuma operação ainda</div>';
-                return;
-            }
-            
-            lista.innerHTML = historico.map(op => `
-                <div class="item-hist">
-                    <div class="data">📅 ${op.data}</div>
-                    <div>Saldo anterior: <strong>R$ ${op.saldoAnterior.toFixed(2).replace('.', ',')}</strong></div>
-                    ${op.novoValor > 0 ? `<div>➕ Entrou: R$ ${op.novoValor.toFixed(2).replace('.', ',')}</div>` : ''}
-                    <div>📈 Rendeu: <strong style="color:#e67700">R$ ${op.lucro.toFixed(2).replace('.', ',')}</strong></div>
-                    ${op.retirado > 0 ? `<div>💸 Retirou: R$ ${op.retirado.toFixed(2).replace('.', ',')}</div>` : ''}
-                    <div>➡️ Novo saldo: <strong style="color:#27ae60">R$ ${op.saldoNovo.toFixed(2).replace('.', ',')}</strong></div>
-                </div>
-            `).join('');
-        }
+    } catch (erro) {
+        console.error("Erro Firebase:", erro);
 
-        function limparHistorico() {
-            if (confirm('Tem certeza que quer apagar todo o histórico?')) {
-                localStorage.clear();
-                saldoAtual = 0;
-                historico = [];
-                document.getElementById('rendeu').textContent = 'R$ 0,00';
-                atualizarTela();
-                renderizarHistorico();
-            }
-        }
-    </script>
+        carregado = false;
+        bloquear(true);
+
+        mostrarStatus(
+            "Erro ao carregar Firebase: " +
+            (erro.code || erro.message || "Erro desconhecido"),
+            true
+        );
+
+        document.getElementById("lista_historico").innerHTML =
+            '<div class="vazio">Não foi possível carregar os dados.</div>';
+    }
+}
+
+window.atualizar = async function() {
+
+    if (!carregado || ocupado) return;
+
+    const periodo =
+        document.getElementById("periodo").value ||
+        new Date().toLocaleDateString("pt-BR", {
+            day: "2-digit",
+            month: "2-digit"
+        });
+
+    const novoValor =
+        Number(document.getElementById("novo_valor").value) || 0;
+
+    const retirado =
+        Number(document.getElementById("retirado").value) || 0;
+
+    if (novoValor < 0 || retirado < 0) {
+        alert("Digite valores positivos.");
+        return;
+    }
+
+    const baseCalculo = saldoAtual + novoValor;
+    const lucro = baseCalculo * 0.055;
+    const novoSaldo = baseCalculo + lucro - retirado;
+
+    if (novoSaldo < 0) {
+        alert("A retirada não pode deixar o saldo negativo.");
+        return;
+    }
+
+    const operacao = {
+        data: new Date().toLocaleDateString("pt-BR"),
+        periodo: periodo,
+        saldoAnterior: saldoAtual,
+        novoValor: novoValor,
+        lucro: lucro,
+        retirado: retirado,
+        saldoNovo: novoSaldo
+    };
+
+    const novoHistorico = [operacao, ...historico];
+
+    bloquear(true);
+    mostrarStatus("Salvando operação no Firebase...");
+
+    try {
+        await salvarFirebase(novoSaldo, novoHistorico);
+
+        saldoAtual = novoSaldo;
+        historico = novoHistorico;
+
+        document.getElementById("rendeu").textContent =
+            dinheiro(lucro);
+
+        document.getElementById("novo_valor").value = "";
+        document.getElementById("retirado").value = "";
+        document.getElementById("periodo").value = "";
+
+        atualizarTela();
+        renderizarHistorico();
+
+        mostrarStatus("✓ Operação salva no Firebase!");
+
+    } catch (erro) {
+        console.error("Erro ao salvar:", erro);
+
+        mostrarStatus(
+            "Erro ao salvar: " + (erro.code || erro.message),
+            true
+        );
+
+        alert("Não foi possível salvar. Seus dados na tela não foram alterados.");
+    } finally {
+        bloquear(false);
+    }
+};
+
+window.limparHistorico = async function() {
+
+    if (!carregado || ocupado) return;
+
+    if (!confirm("Tem certeza que quer apagar todo o histórico e zerar o saldo?")) {
+        return;
+    }
+
+    bloquear(true);
+    mostrarStatus("Limpando dados no Firebase...");
+
+    try {
+        await salvarFirebase(0, []);
+
+        saldoAtual = 0;
+        historico = [];
+
+        document.getElementById("rendeu").textContent = "R$ 0,00";
+
+        atualizarTela();
+        renderizarHistorico();
+
+        mostrarStatus("✓ Histórico apagado e saldo zerado.");
+
+    } catch (erro) {
+        console.error("Erro ao limpar:", erro);
+
+        mostrarStatus(
+            "Erro ao limpar: " + (erro.code || erro.message),
+            true
+        );
+    } finally {
+        bloquear(false);
+    }
+};
+
+carregarFirebase();
+
+</script>
+
 </body>
 </html>
-

@@ -45,6 +45,168 @@ h1 {
     color: #856404;
 }
 
+/* CALENDÁRIO */
+
+.calendario {
+    background: #f8fbff;
+    border: 1px solid #dce6f1;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    touch-action: pan-y;
+    user-select: none;
+}
+
+.cal-topo {
+    text-align: center;
+    color: #174ea6;
+    font-size: 19px;
+    font-weight: bold;
+    padding: 8px;
+    text-transform: capitalize;
+}
+
+.cal-instrucao {
+    text-align: center;
+    color: #888;
+    font-size: 11px;
+    margin-bottom: 12px;
+}
+
+.cal-grade {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    text-align: center;
+}
+
+.cal-dia-semana {
+    font-size: 12px;
+    color: #666;
+    font-weight: bold;
+    padding: 8px 0;
+}
+
+.cal-dia {
+    min-height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    font-size: 13px;
+    color: #333;
+    position: relative;
+}
+
+.cal-vazio {
+    min-height: 39px;
+}
+
+.cal-dia.inicio {
+    background: #174ea6;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+}
+
+.cal-dia.hoje {
+    border: 2px solid #27ae60;
+    font-weight: bold;
+}
+
+.cal-legenda {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 13px;
+    font-size: 11px;
+    color: #666;
+}
+
+.legenda-inicio {
+    color: #174ea6;
+    font-weight: bold;
+}
+
+/* PROJEÇÃO */
+
+.projecao {
+    background: #f0f6ff;
+    border: 1px solid #cbdcf5;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 22px;
+}
+
+.projecao h3 {
+    color: #174ea6;
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.projecao p {
+    color: #555;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.cenarios {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.cenario {
+    background: white;
+    border-radius: 8px;
+    padding: 11px 7px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.cenario span {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.cenario strong {
+    color: #174ea6;
+    font-size: 17px;
+}
+
+.tabela-projecao {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.tabela-projecao th,
+.tabela-projecao td {
+    padding: 9px 4px;
+    text-align: center;
+    border-bottom: 1px solid #dce6f1;
+}
+
+.tabela-projecao th {
+    color: #174ea6;
+    background: #e5efff;
+}
+
+.tabela-projecao td {
+    color: #444;
+}
+
+.aviso-projecao {
+    margin-top: 12px;
+    font-size: 11px;
+    color: #777;
+    line-height: 1.5;
+}
+
 .caixa-total {
     background: #eafaf1;
     border: 3px solid #27ae60;
@@ -198,6 +360,85 @@ button:disabled {
         Aguarde, carregando Firebase...
     </div>
 
+    <!-- CALENDÁRIO NO INÍCIO -->
+
+    <div class="calendario" id="calendario">
+
+        <div class="cal-topo" id="mesAno"></div>
+
+        <div class="cal-instrucao">
+            Deslize para os lados para mudar o mês
+        </div>
+
+        <div class="cal-grade" id="gradeCalendario"></div>
+
+        <div class="cal-legenda">
+            <span class="legenda-inicio">● Início do planejamento</span>
+            <span>🟢 Hoje</span>
+        </div>
+
+    </div>
+
+    <!-- PROJEÇÃO DE 12 SEMANAS -->
+
+    <div class="projecao">
+
+        <h3>📈 PLANEJAMENTO DE CRESCIMENTO</h3>
+
+        <p>
+            Início: <strong>02/11/2026</strong><br>
+            Depósitos previstos: R$ 500 a R$ 700 por semana.<br>
+            Rendimento considerado: 5,5% por semana.
+        </p>
+
+        <div class="cenarios">
+
+            <div class="cenario">
+                <span>Depósito menor</span>
+                <strong>R$ 500</strong>
+                <span>por semana</span>
+            </div>
+
+            <div class="cenario">
+                <span>Depósito maior</span>
+                <strong>R$ 700</strong>
+                <span>por semana</span>
+            </div>
+
+        </div>
+
+        <div style="overflow-x:auto">
+
+            <table class="tabela-projecao">
+
+                <thead>
+                    <tr>
+                        <th>Semana</th>
+                        <th>R$ 500</th>
+                        <th>R$ 700</th>
+                    </tr>
+                </thead>
+
+                <tbody id="listaProjecao">
+                    <tr>
+                        <td colspan="3">Aguardando Firebase...</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="aviso-projecao">
+            Valores estimados, calculados a partir do saldo real
+            carregado do Firebase. Os depósitos projetados não
+            são lançados no saldo real. A projeção considera
+            depósitos no início de cada semana e rendimento
+            de 5,5% sobre o valor acumulado.
+        </div>
+
+    </div>
+
     <div class="destaque">
         📅 Sexta-Feira: Atualização Semanal — 5,5% ao período
     </div>
@@ -277,7 +518,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Coleção e documento usados no Firestore
 const documentoCaixa = doc(db, "ideias", "caixa_unica");
 
 let saldoAtual = 0;
@@ -285,9 +525,109 @@ let historico = [];
 let carregado = false;
 let ocupado = false;
 
-const statusFirebase = document.getElementById("statusFirebase");
-const btnAtualizar = document.getElementById("btnAtualizar");
-const btnLimpar = document.getElementById("btnLimpar");
+/* CALENDÁRIO */
+
+const dataInicio = new Date(2026, 10, 2);
+let mesExibido = new Date(2026, 10, 1);
+
+const nomesMeses = [
+    "janeiro", "fevereiro", "março", "abril",
+    "maio", "junho", "julho", "agosto",
+    "setembro", "outubro", "novembro", "dezembro"
+];
+
+const nomesDias = ["SEG", "TER", "QUA", "QUI", "SEX", "SÁB", "DOM"];
+
+function renderizarCalendario() {
+
+    const grade = document.getElementById("gradeCalendario");
+    const titulo = document.getElementById("mesAno");
+
+    const ano = mesExibido.getFullYear();
+    const mes = mesExibido.getMonth();
+
+    titulo.textContent = nomesMeses[mes] + " de " + ano;
+
+    grade.innerHTML = "";
+
+    nomesDias.forEach(nome => {
+        const dia = document.createElement("div");
+        dia.className = "cal-dia-semana";
+        dia.textContent = nome;
+        grade.appendChild(dia);
+    });
+
+    const primeiroDia = new Date(ano, mes, 1);
+    let deslocamento = primeiroDia.getDay() - 1;
+
+    if (deslocamento < 0) deslocamento = 6;
+
+    for (let i = 0; i < deslocamento; i++) {
+        const vazio = document.createElement("div");
+        vazio.className = "cal-vazio";
+        grade.appendChild(vazio);
+    }
+
+    const totalDias = new Date(ano, mes + 1, 0).getDate();
+
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+
+    for (let numero = 1; numero <= totalDias; numero++) {
+
+        const dia = document.createElement("div");
+        dia.className = "cal-dia";
+        dia.textContent = numero;
+
+        const data = new Date(ano, mes, numero);
+
+        if (data.getTime() === dataInicio.getTime()) {
+            dia.classList.add("inicio");
+            dia.title = "Início do planejamento";
+        }
+
+        if (data.getTime() === hoje.getTime()) {
+            dia.classList.add("hoje");
+        }
+
+        grade.appendChild(dia);
+    }
+
+}
+
+const calendario = document.getElementById("calendario");
+
+let toqueInicialX = 0;
+let toqueInicialY = 0;
+
+calendario.addEventListener("touchstart", function(e) {
+    toqueInicialX = e.changedTouches[0].screenX;
+    toqueInicialY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+calendario.addEventListener("touchend", function(e) {
+
+    const finalX = e.changedTouches[0].screenX;
+    const finalY = e.changedTouches[0].screenY;
+
+    const diferencaX = finalX - toqueInicialX;
+    const diferencaY = finalY - toqueInicialY;
+
+    if (Math.abs(diferencaX) > 45 &&
+        Math.abs(diferencaX) > Math.abs(diferencaY)) {
+
+        if (diferencaX < 0) {
+            mesExibido.setMonth(mesExibido.getMonth() + 1);
+        } else {
+            mesExibido.setMonth(mesExibido.getMonth() - 1);
+        }
+
+        renderizarCalendario();
+    }
+
+}, { passive: true });
+
+/* PROJEÇÃO FINANCEIRA */
 
 function dinheiro(valor) {
     return Number(valor || 0).toLocaleString("pt-BR", {
@@ -295,6 +635,54 @@ function dinheiro(valor) {
         currency: "BRL"
     });
 }
+
+function renderizarProjecao() {
+
+    const lista = document.getElementById("listaProjecao");
+
+    lista.innerHTML = "";
+
+    let saldo500 = saldoAtual;
+    let saldo700 = saldoAtual;
+
+    for (let semana = 1; semana <= 12; semana++) {
+
+        saldo500 = (saldo500 + 500) * 1.055;
+        saldo700 = (saldo700 + 700) * 1.055;
+
+        const dataSemana = new Date(dataInicio);
+        dataSemana.setDate(dataSemana.getDate() + (semana - 1) * 7);
+
+        const dataFormatada = dataSemana.toLocaleDateString("pt-BR", {
+            day: "2-digit",
+            month: "2-digit"
+        });
+
+        const tr = document.createElement("tr");
+
+        const tdSemana = document.createElement("td");
+        tdSemana.textContent = semana + "ª (" + dataFormatada + ")";
+
+        const td500 = document.createElement("td");
+        td500.textContent = dinheiro(saldo500);
+
+        const td700 = document.createElement("td");
+        td700.textContent = dinheiro(saldo700);
+
+        tr.append(tdSemana, td500, td700);
+
+        lista.appendChild(tr);
+    }
+
+}
+
+renderizarCalendario();
+
+/* FIREBASE E RELATÓRIO ORIGINAL */
+
+const statusFirebase = document.getElementById("statusFirebase");
+const btnAtualizar = document.getElementById("btnAtualizar");
+const btnLimpar = document.getElementById("btnLimpar");
 
 function mostrarStatus(mensagem, erro = false) {
     statusFirebase.textContent = mensagem;
@@ -311,9 +699,12 @@ function bloquear(bloqueado) {
 function atualizarTela() {
     document.getElementById("saldo_total").textContent =
         dinheiro(saldoAtual);
+
+    renderizarProjecao();
 }
 
 function renderizarHistorico() {
+
     const lista = document.getElementById("lista_historico");
 
     lista.innerHTML = "";
@@ -325,6 +716,7 @@ function renderizarHistorico() {
     }
 
     historico.forEach(op => {
+
         const item = document.createElement("div");
         item.className = "item-hist";
 
@@ -362,34 +754,42 @@ function renderizarHistorico() {
         if (Number(op.retirado) > 0) item.append(retirada);
 
         item.append(novoSaldo);
+
         lista.append(item);
     });
+
 }
 
 async function salvarFirebase(novoSaldo, novoHistorico) {
+
     await setDoc(documentoCaixa, {
         saldoAtual: novoSaldo,
         historico: novoHistorico,
         atualizadoEm: new Date().toISOString()
     });
+
 }
 
 async function carregarFirebase() {
+
     try {
+
         mostrarStatus("Aguarde, carregando Firebase...");
 
         const snapshot = await getDoc(documentoCaixa);
 
         if (snapshot.exists()) {
+
             const dados = snapshot.data();
 
             saldoAtual = Number(dados.saldoAtual) || 0;
+
             historico = Array.isArray(dados.historico)
                 ? dados.historico
                 : [];
 
         } else {
-            // Primeira utilização: recupera dados antigos deste navegador.
+
             const saldoAntigo =
                 Number(localStorage.getItem("saldoAtual")) || 0;
 
@@ -403,12 +803,13 @@ async function carregarFirebase() {
             }
 
             saldoAtual = saldoAntigo;
+
             historico = Array.isArray(historicoAntigo)
                 ? historicoAntigo
                 : [];
 
-            // Cria o documento inicial na coleção ideias.
             await salvarFirebase(saldoAtual, historico);
+
         }
 
         carregado = true;
@@ -421,6 +822,7 @@ async function carregarFirebase() {
         mostrarStatus("✓ Firebase conectado! Dados carregados.");
 
     } catch (erro) {
+
         console.error("Erro Firebase:", erro);
 
         carregado = false;
@@ -434,7 +836,12 @@ async function carregarFirebase() {
 
         document.getElementById("lista_historico").innerHTML =
             '<div class="vazio">Não foi possível carregar os dados.</div>';
+
+        document.getElementById("listaProjecao").innerHTML =
+            '<tr><td colspan="3">Não foi possível carregar a projeção.</td></tr>';
+
     }
+
 }
 
 window.atualizar = async function() {
@@ -484,6 +891,7 @@ window.atualizar = async function() {
     mostrarStatus("Salvando operação no Firebase...");
 
     try {
+
         await salvarFirebase(novoSaldo, novoHistorico);
 
         saldoAtual = novoSaldo;
@@ -502,6 +910,7 @@ window.atualizar = async function() {
         mostrarStatus("✓ Operação salva no Firebase!");
 
     } catch (erro) {
+
         console.error("Erro ao salvar:", erro);
 
         mostrarStatus(
@@ -510,9 +919,13 @@ window.atualizar = async function() {
         );
 
         alert("Não foi possível salvar. Seus dados na tela não foram alterados.");
+
     } finally {
+
         bloquear(false);
+
     }
+
 };
 
 window.limparHistorico = async function() {
@@ -527,6 +940,7 @@ window.limparHistorico = async function() {
     mostrarStatus("Limpando dados no Firebase...");
 
     try {
+
         await salvarFirebase(0, []);
 
         saldoAtual = 0;
@@ -540,15 +954,20 @@ window.limparHistorico = async function() {
         mostrarStatus("✓ Histórico apagado e saldo zerado.");
 
     } catch (erro) {
+
         console.error("Erro ao limpar:", erro);
 
         mostrarStatus(
             "Erro ao limpar: " + (erro.code || erro.message),
             true
         );
+
     } finally {
+
         bloquear(false);
+
     }
+
 };
 
 carregarFirebase();

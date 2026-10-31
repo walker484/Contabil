@@ -5,520 +5,131 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Relatório Semanal — Caixa Única</title>
-
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    background: #f5f5f5;
-    padding: 20px;
-    max-width: 460px;
-    margin: 0 auto;
-}
-
-.card {
-    background: white;
-    border-radius: 16px;
-    padding: 25px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
-
-h1 {
-    text-align: center;
-    color: #2c3e50;
-    font-size: 22px;
-    margin-bottom: 15px;
-}
-
-.destaque {
-    background: #fff3cd;
-    padding: 12px;
-    border-radius: 8px;
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 15px;
-    color: #856404;
-}
-
-/* CALENDÁRIO */
-
-.calendario {
-    background: #f8fbff;
-    border: 1px solid #dce6f1;
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 20px;
-    touch-action: pan-y;
-    user-select: none;
-}
-
-.cal-topo {
-    text-align: center;
-    color: #174ea6;
-    font-size: 19px;
-    font-weight: bold;
-    padding: 8px;
-    text-transform: capitalize;
-}
-
-.cal-instrucao {
-    text-align: center;
-    color: #888;
-    font-size: 11px;
-    margin-bottom: 12px;
-}
-
-.cal-grade {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
-    text-align: center;
-}
-
-.cal-dia-semana {
-    font-size: 12px;
-    color: #666;
-    font-weight: bold;
-    padding: 8px 0;
-}
-
-.cal-dia {
-    min-height: 39px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 7px;
-    font-size: 13px;
-    color: #333;
-    position: relative;
-}
-
-.cal-vazio {
-    min-height: 39px;
-}
-
-.cal-dia.inicio {
-    background: #174ea6;
-    color: white;
-    font-weight: bold;
-    border-radius: 50%;
-}
-
-.cal-dia.hoje {
-    border: 2px solid #27ae60;
-    font-weight: bold;
-}
-
-.cal-legenda {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 13px;
-    font-size: 11px;
-    color: #666;
-}
-
-.legenda-inicio {
-    color: #174ea6;
-    font-weight: bold;
-}
-
-/* PROJEÇÃO */
-
-.projecao {
-    background: #f0f6ff;
-    border: 1px solid #cbdcf5;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 22px;
-}
-
-.projecao h3 {
-    color: #174ea6;
-    font-size: 17px;
-    margin-bottom: 8px;
-}
-
-.projecao p {
-    color: #555;
-    font-size: 13px;
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
-.cenarios {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.cenario {
-    background: white;
-    border-radius: 8px;
-    padding: 11px 7px;
-    text-align: center;
-    border: 1px solid #ddd;
-}
-
-.cenario span {
-    display: block;
-    font-size: 12px;
-    color: #666;
-    margin-bottom: 6px;
-}
-
-.cenario strong {
-    color: #174ea6;
-    font-size: 17px;
-}
-
-.tabela-projecao {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-}
-
-.tabela-projecao th,
-.tabela-projecao td {
-    padding: 9px 4px;
-    text-align: center;
-    border-bottom: 1px solid #dce6f1;
-}
-
-.tabela-projecao th {
-    color: #174ea6;
-    background: #e5efff;
-}
-
-.tabela-projecao td {
-    color: #444;
-}
-
-.aviso-projecao {
-    margin-top: 12px;
-    font-size: 11px;
-    color: #777;
-    line-height: 1.5;
-}
-
-.caixa-total {
-    background: #eafaf1;
-    border: 3px solid #27ae60;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-.label-total {
-    font-size: 15px;
-    color: #2c3e50;
-    margin-bottom: 8px;
-}
-
-.valor-total {
-    font-size: 28px;
-    font-weight: bold;
-    color: #27ae60;
-    overflow-wrap: anywhere;
-}
-
-.linha {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.linha label {
-    font-size: 15px;
-    color: #444;
-    flex: 1;
-}
-
-input {
-    width: 160px;
-    min-width: 0;
-    padding: 10px 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 16px;
-    text-align: right;
-}
-
-.rendeu {
-    font-size: 18px;
-    font-weight: bold;
-    color: #e67700;
-}
-
-button {
-    width: 100%;
-    padding: 16px;
-    background: #27ae60;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-button:hover {
-    background: #219653;
-}
-
-button:disabled {
-    opacity: 0.55;
-    cursor: not-allowed;
-}
-
-.botoes {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.botoes button:last-child {
-    background: #e74c3c;
-}
-
-.botoes button:last-child:hover {
-    background: #c0392b;
-}
-
-.historico {
-    margin-top: 25px;
-}
-
-.historico h3 {
-    font-size: 16px;
-    color: #444;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #eee;
-}
-
-.item-hist {
-    padding: 10px 12px;
-    border-radius: 6px;
-    margin-bottom: 8px;
-    background: #f8f9fa;
-    font-size: 14px;
-    line-height: 1.6;
-    overflow-wrap: anywhere;
-}
-
-.data {
-    color: #666;
-    font-size: 13px;
-}
-
-.vazio {
-    color: #999;
-    text-align: center;
-    padding: 15px;
-    font-size: 14px;
-}
-
-#statusFirebase {
-    text-align: center;
-    font-size: 13px;
-    padding: 10px;
-    margin-bottom: 12px;
-    border-radius: 7px;
-    background: #fff3cd;
-    color: #856404;
-    overflow-wrap: anywhere;
-}
-
-@media (max-width: 360px) {
-    body { padding: 10px; }
-    .card { padding: 16px; }
-    .linha label { font-size: 13px; }
-    input { width: 125px; font-size: 14px; }
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f5f5f5;padding:20px;max-width:460px;margin:0 auto}
+.card{background:white;border-radius:16px;padding:25px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+h1{text-align:center;color:#2c3e50;font-size:22px;margin-bottom:15px}
+.destaque{background:#fff3cd;padding:12px;border-radius:8px;text-align:center;margin-bottom:20px;font-size:15px;color:#856404}
+.calendario{background:#f8fbff;border:1px solid #dce6f1;border-radius:12px;padding:15px;margin-bottom:20px;touch-action:pan-y;user-select:none}
+.cal-topo{text-align:center;color:#174ea6;font-size:19px;font-weight:bold;padding:8px;text-transform:capitalize}
+.cal-instrucao{text-align:center;color:#888;font-size:11px;margin-bottom:12px}
+.cal-grade{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal-dia-semana{font-size:12px;color:#666;font-weight:bold;padding:8px 0}
+.cal-dia{min-height:39px;display:flex;align-items:center;justify-content:center;border-radius:7px;font-size:13px;color:#333;position:relative}
+.cal-dia.fim-semana{background:#fff0df;color:#d66a00;font-weight:bold}
+.cal-vazio{min-height:39px}
+.cal-dia.inicio{background:#174ea6;color:white;font-weight:bold;border-radius:50%}
+.cal-dia.hoje{border:2px solid #27ae60;font-weight:bold}
+.cal-legenda{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:13px;font-size:11px;color:#666}
+.legenda-inicio{color:#174ea6;font-weight:bold}
+.projecao{background:#f0f6ff;border:1px solid #cbdcf5;padding:15px;border-radius:12px;margin-bottom:22px}
+.projecao h3{color:#174ea6;font-size:17px;margin-bottom:8px}
+.projecao p{color:#555;font-size:13px;line-height:1.6;margin-bottom:10px}
+.cenarios{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.cenario{background:white;border-radius:8px;padding:11px 7px;text-align:center;border:1px solid #ddd}
+.cenario span{display:block;font-size:12px;color:#666;margin-bottom:6px}
+.cenario strong{color:#174ea6;font-size:17px}
+.tabela-projecao{width:100%;border-collapse:collapse;font-size:12px}
+.tabela-projecao th,.tabela-projecao td{padding:9px 4px;text-align:center;border-bottom:1px solid #dce6f1}
+.tabela-projecao th{color:#174ea6;background:#e5efff}
+.tabela-projecao td{color:#444}
+.aviso-projecao{margin-top:12px;font-size:11px;color:#777;line-height:1.5}
+.caixa-total{background:#eafaf1;border:3px solid #27ae60;border-radius:12px;padding:20px;text-align:center;margin-bottom:25px}
+.label-total{font-size:15px;color:#2c3e50;margin-bottom:8px}
+.valor-total{font-size:28px;font-weight:bold;color:#27ae60;overflow-wrap:anywhere}
+.linha{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #eee}
+.linha label{font-size:15px;color:#444;flex:1}
+input{width:160px;min-width:0;padding:10px 12px;border:1px solid #ddd;border-radius:6px;font-size:16px;text-align:right}
+.rendeu{font-size:18px;font-weight:bold;color:#e67700}
+button{width:100%;padding:16px;background:#27ae60;color:white;border:none;border-radius:8px;font-size:18px;font-weight:600;cursor:pointer;margin-top:10px}
+button:hover{background:#219653}
+button:disabled{opacity:.55;cursor:not-allowed}
+.botoes{display:flex;gap:10px;margin-top:10px}
+.botoes button:last-child{background:#e74c3c}
+.botoes button:last-child:hover{background:#c0392b}
+.historico{margin-top:25px}
+.historico h3{font-size:16px;color:#444;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #eee}
+.item-hist{padding:10px 12px;border-radius:6px;margin-bottom:8px;background:#f8f9fa;font-size:14px;line-height:1.6;overflow-wrap:anywhere}
+.data{color:#666;font-size:13px}
+.vazio{color:#999;text-align:center;padding:15px;font-size:14px}
+#statusFirebase{text-align:center;font-size:13px;padding:10px;margin-bottom:12px;border-radius:7px;background:#fff3cd;color:#856404;overflow-wrap:anywhere}
+@media(max-width:360px){body{padding:10px}.card{padding:16px}.linha label{font-size:13px}input{width:125px;font-size:14px}}
 </style>
 </head>
-
 <body>
-
 <div class="card">
+<h1>📋 RELATÓRIO SEMANAL</h1>
+<div id="statusFirebase">Aguarde, carregando Firebase...</div>
 
-    <h1>📋 RELATÓRIO SEMANAL</h1>
+<div class="calendario" id="calendario">
+<div class="cal-topo" id="mesAno"></div>
+<div class="cal-instrucao">Deslize para os lados para mudar o mês</div>
+<div class="cal-grade" id="gradeCalendario"></div>
+<div class="cal-legenda">
+<span class="legenda-inicio">● Início do planejamento</span>
+<span>🟢 Hoje</span>
+<span style="color:#d66a00;font-weight:bold">● Fim de semana</span>
+</div>
+</div>
 
-    <div id="statusFirebase">
-        Aguarde, carregando Firebase...
-    </div>
+<div class="projecao">
+<h3>📈 PLANEJAMENTO DE CRESCIMENTO</h3>
+<p>Início: <strong>02/11/2026</strong><br>
+Depósitos previstos: R$ 500 a R$ 700 por semana.<br>
+Rendimento considerado: 5,5% por semana.</p>
+<div class="cenarios">
+<div class="cenario"><span>Depósito menor</span><strong>R$ 500</strong><span>por semana</span></div>
+<div class="cenario"><span>Depósito maior</span><strong>R$ 700</strong><span>por semana</span></div>
+</div>
+<div style="overflow-x:auto">
+<table class="tabela-projecao">
+<thead><tr><th>Semana</th><th>R$ 500</th><th>R$ 700</th></tr></thead>
+<tbody id="listaProjecao"><tr><td colspan="3">Aguardando Firebase...</td></tr></tbody>
+</table>
+</div>
+<div class="aviso-projecao">Valores estimados, calculados a partir do saldo real carregado do Firebase. Os depósitos projetados não são lançados no saldo real. A projeção considera depósitos no início de cada semana e rendimento de 5,5% sobre o valor acumulado.</div>
+</div>
 
-    <!-- CALENDÁRIO NO INÍCIO -->
+<div class="destaque">📅 Sexta-Feira: Atualização Semanal — 5,5% ao período</div>
+<div class="caixa-total">
+<div class="label-total">💰 SALDO ATUAL</div>
+<div class="valor-total" id="saldo_total">R$ 0,00</div>
+</div>
 
-    <div class="calendario" id="calendario">
+<div class="linha"><label>📅 Período</label><input type="text" id="periodo" placeholder="__/__ a __/__" style="text-align:center"></div>
+<div class="linha"><label>➕ Novo valor que entrou (R$)</label><input type="number" step="0.01" min="0" id="novo_valor" placeholder="0,00"></div>
+<div class="linha"><label>💸 Valor retirado (R$)</label><input type="number" step="0.01" min="0" id="retirado" placeholder="0,00"></div>
+<div class="linha"><label>📈 Rendeu nesta semana</label><div class="rendeu" id="rendeu">R$ 0,00</div></div>
 
-        <div class="cal-topo" id="mesAno"></div>
+<button id="btnAtualizar" onclick="atualizar()" disabled>➕ ATUALIZAR SEXTA-FEIRA</button>
+<div class="botoes">
+<button id="btnLimpar" onclick="limparHistorico()" style="flex:1;font-size:15px;padding:10px" disabled>🗑️ Limpar Histórico</button>
+</div>
 
-        <div class="cal-instrucao">
-            Deslize para os lados para mudar o mês
-        </div>
-
-        <div class="cal-grade" id="gradeCalendario"></div>
-
-        <div class="cal-legenda">
-            <span class="legenda-inicio">● Início do planejamento</span>
-            <span>🟢 Hoje</span>
-        </div>
-
-    </div>
-
-    <!-- PROJEÇÃO DE 12 SEMANAS -->
-
-    <div class="projecao">
-
-        <h3>📈 PLANEJAMENTO DE CRESCIMENTO</h3>
-
-        <p>
-            Início: <strong>02/11/2026</strong><br>
-            Depósitos previstos: R$ 500 a R$ 700 por semana.<br>
-            Rendimento considerado: 5,5% por semana.
-        </p>
-
-        <div class="cenarios">
-
-            <div class="cenario">
-                <span>Depósito menor</span>
-                <strong>R$ 500</strong>
-                <span>por semana</span>
-            </div>
-
-            <div class="cenario">
-                <span>Depósito maior</span>
-                <strong>R$ 700</strong>
-                <span>por semana</span>
-            </div>
-
-        </div>
-
-        <div style="overflow-x:auto">
-
-            <table class="tabela-projecao">
-
-                <thead>
-                    <tr>
-                        <th>Semana</th>
-                        <th>R$ 500</th>
-                        <th>R$ 700</th>
-                    </tr>
-                </thead>
-
-                <tbody id="listaProjecao">
-                    <tr>
-                        <td colspan="3">Aguardando Firebase...</td>
-                    </tr>
-                </tbody>
-
-            </table>
-
-        </div>
-
-        <div class="aviso-projecao">
-            Valores estimados, calculados a partir do saldo real
-            carregado do Firebase. Os depósitos projetados não
-            são lançados no saldo real. A projeção considera
-            depósitos no início de cada semana e rendimento
-            de 5,5% sobre o valor acumulado.
-        </div>
-
-    </div>
-
-    <div class="destaque">
-        📅 Sexta-Feira: Atualização Semanal — 5,5% ao período
-    </div>
-
-    <div class="caixa-total">
-        <div class="label-total">💰 SALDO ATUAL</div>
-        <div class="valor-total" id="saldo_total">R$ 0,00</div>
-    </div>
-
-    <div class="linha">
-        <label>📅 Período</label>
-        <input type="text" id="periodo"
-        placeholder="__/__ a __/__"
-        style="text-align:center;">
-    </div>
-
-    <div class="linha">
-        <label>➕ Novo valor que entrou (R$)</label>
-        <input type="number" step="0.01" min="0"
-        id="novo_valor" placeholder="0,00">
-    </div>
-
-    <div class="linha">
-        <label>💸 Valor retirado (R$)</label>
-        <input type="number" step="0.01" min="0"
-        id="retirado" placeholder="0,00">
-    </div>
-
-    <div class="linha">
-        <label>📈 Rendeu nesta semana</label>
-        <div class="rendeu" id="rendeu">R$ 0,00</div>
-    </div>
-
-    <button id="btnAtualizar" onclick="atualizar()" disabled>
-        ➕ ATUALIZAR SEXTA-FEIRA
-    </button>
-
-    <div class="botoes">
-        <button id="btnLimpar" onclick="limparHistorico()"
-        style="flex:1;font-size:15px;padding:10px;" disabled>
-            🗑️ Limpar Histórico
-        </button>
-    </div>
-
-    <div class="historico">
-        <h3>📝 Histórico de Operações</h3>
-        <div id="lista_historico">
-            <div class="vazio">Carregando...</div>
-        </div>
-    </div>
-
+<div class="historico">
+<h3>📝 Histórico de Operações</h3>
+<div id="lista_historico"><div class="vazio">Carregando...</div></div>
+</div>
 </div>
 
 <script type="module">
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDsZUHfZ7EBatnMwwR4FKgPWLjZybIm9KI",
-    authDomain: "walker-midia.firebaseapp.com",
-    databaseURL: "https://walker-midia-default-rtdb.firebaseio.com",
-    projectId: "walker-midia",
-    storageBucket: "walker-midia.firebasestorage.app",
-    messagingSenderId: "223143706690",
-    appId: "1:223143706690:web:3c9e81a0d21173a59caddb"
+apiKey:"AIzaSyDsZUHfZ7EBatnMwwR4FKgPWLjZybIm9KI",
+authDomain:"walker-midia.firebaseapp.com",
+databaseURL:"https://walker-midia-default-rtdb.firebaseio.com",
+projectId:"walker-midia",
+storageBucket:"walker-midia.firebasestorage.app",
+messagingSenderId:"223143706690",
+appId:"1:223143706690:web:3c9e81a0d21173a59caddb"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
-const documentoCaixa = doc(db, "ideias", "caixa_unica");
+const documentoCaixa = doc(db,"ideias","caixa_unica");
 
 let saldoAtual = 0;
 let historico = [];
@@ -526,453 +137,310 @@ let carregado = false;
 let ocupado = false;
 
 /* CALENDÁRIO */
+const dataInicio = new Date(2026,10,2);
+let mesExibido = new Date(2026,10,1);
+const nomesMeses = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+const nomesDias = ["SEG","TER","QUA","QUI","SEX","SÁB","DOM"];
 
-const dataInicio = new Date(2026, 10, 2);
-let mesExibido = new Date(2026, 10, 1);
+function renderizarCalendario(){
+const grade=document.getElementById("gradeCalendario");
+const titulo=document.getElementById("mesAno");
+const ano=mesExibido.getFullYear();
+const mes=mesExibido.getMonth();
+titulo.textContent=nomesMeses[mes]+" de "+ano;
+grade.innerHTML="";
 
-const nomesMeses = [
-    "janeiro", "fevereiro", "março", "abril",
-    "maio", "junho", "julho", "agosto",
-    "setembro", "outubro", "novembro", "dezembro"
-];
+nomesDias.forEach(nome=>{
+const dia=document.createElement("div");
+dia.className="cal-dia-semana";
+dia.textContent=nome;
+grade.appendChild(dia);
+});
 
-const nomesDias = ["SEG", "TER", "QUA", "QUI", "SEX", "SÁB", "DOM"];
+const primeiroDia=new Date(ano,mes,1);
+let deslocamento=primeiroDia.getDay()-1;
+if(deslocamento<0)deslocamento=6;
 
-function renderizarCalendario() {
-
-    const grade = document.getElementById("gradeCalendario");
-    const titulo = document.getElementById("mesAno");
-
-    const ano = mesExibido.getFullYear();
-    const mes = mesExibido.getMonth();
-
-    titulo.textContent = nomesMeses[mes] + " de " + ano;
-
-    grade.innerHTML = "";
-
-    nomesDias.forEach(nome => {
-        const dia = document.createElement("div");
-        dia.className = "cal-dia-semana";
-        dia.textContent = nome;
-        grade.appendChild(dia);
-    });
-
-    const primeiroDia = new Date(ano, mes, 1);
-    let deslocamento = primeiroDia.getDay() - 1;
-
-    if (deslocamento < 0) deslocamento = 6;
-
-    for (let i = 0; i < deslocamento; i++) {
-        const vazio = document.createElement("div");
-        vazio.className = "cal-vazio";
-        grade.appendChild(vazio);
-    }
-
-    const totalDias = new Date(ano, mes + 1, 0).getDate();
-
-    const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
-
-    for (let numero = 1; numero <= totalDias; numero++) {
-
-        const dia = document.createElement("div");
-        dia.className = "cal-dia";
-        dia.textContent = numero;
-
-        const data = new Date(ano, mes, numero);
-
-        if (data.getTime() === dataInicio.getTime()) {
-            dia.classList.add("inicio");
-            dia.title = "Início do planejamento";
-        }
-
-        if (data.getTime() === hoje.getTime()) {
-            dia.classList.add("hoje");
-        }
-
-        grade.appendChild(dia);
-    }
-
+for(let i=0;i<deslocamento;i++){
+const vazio=document.createElement("div");
+vazio.className="cal-vazio";
+grade.appendChild(vazio);
 }
 
-const calendario = document.getElementById("calendario");
+const totalDias=new Date(ano,mes+1,0).getDate();
+const hoje=new Date();
+hoje.setHours(0,0,0,0);
 
-let toqueInicialX = 0;
-let toqueInicialY = 0;
+for(let numero=1;numero<=totalDias;numero++){
+const dia=document.createElement("div");
+dia.className="cal-dia";
+dia.textContent=numero;
+const data=new Date(ano,mes,numero);
 
-calendario.addEventListener("touchstart", function(e) {
-    toqueInicialX = e.changedTouches[0].screenX;
-    toqueInicialY = e.changedTouches[0].screenY;
-}, { passive: true });
-
-calendario.addEventListener("touchend", function(e) {
-
-    const finalX = e.changedTouches[0].screenX;
-    const finalY = e.changedTouches[0].screenY;
-
-    const diferencaX = finalX - toqueInicialX;
-    const diferencaY = finalY - toqueInicialY;
-
-    if (Math.abs(diferencaX) > 45 &&
-        Math.abs(diferencaX) > Math.abs(diferencaY)) {
-
-        if (diferencaX < 0) {
-            mesExibido.setMonth(mesExibido.getMonth() + 1);
-        } else {
-            mesExibido.setMonth(mesExibido.getMonth() - 1);
-        }
-
-        renderizarCalendario();
-    }
-
-}, { passive: true });
-
-/* PROJEÇÃO FINANCEIRA */
-
-function dinheiro(valor) {
-    return Number(valor || 0).toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-    });
+if(data.getDay()===0||data.getDay()===6){
+dia.classList.add("fim-semana");
+}
+if(data.getTime()===dataInicio.getTime()){
+dia.classList.add("inicio");
+dia.title="Início do planejamento";
+}
+if(data.getTime()===hoje.getTime()){
+dia.classList.add("hoje");
+}
+grade.appendChild(dia);
+}
 }
 
-function renderizarProjecao() {
+const calendario=document.getElementById("calendario");
+let toqueInicialX=0;
+let toqueInicialY=0;
 
-    const lista = document.getElementById("listaProjecao");
+calendario.addEventListener("touchstart",e=>{
+toqueInicialX=e.changedTouches[0].screenX;
+toqueInicialY=e.changedTouches[0].screenY;
+},{passive:true});
 
-    lista.innerHTML = "";
+calendario.addEventListener("touchend",e=>{
+const finalX=e.changedTouches[0].screenX;
+const finalY=e.changedTouches[0].screenY;
+const diferencaX=finalX-toqueInicialX;
+const diferencaY=finalY-toqueInicialY;
 
-    let saldo500 = saldoAtual;
-    let saldo700 = saldoAtual;
+if(Math.abs(diferencaX)>45&&Math.abs(diferencaX)>Math.abs(diferencaY)){
+if(diferencaX<0)mesExibido.setMonth(mesExibido.getMonth()+1);
+else mesExibido.setMonth(mesExibido.getMonth()-1);
+renderizarCalendario();
+}
+},{passive:true});
 
-    for (let semana = 1; semana <= 12; semana++) {
-
-        saldo500 = (saldo500 + 500) * 1.055;
-        saldo700 = (saldo700 + 700) * 1.055;
-
-        const dataSemana = new Date(dataInicio);
-        dataSemana.setDate(dataSemana.getDate() + (semana - 1) * 7);
-
-        const dataFormatada = dataSemana.toLocaleDateString("pt-BR", {
-            day: "2-digit",
-            month: "2-digit"
-        });
-
-        const tr = document.createElement("tr");
-
-        const tdSemana = document.createElement("td");
-        tdSemana.textContent = semana + "ª (" + dataFormatada + ")";
-
-        const td500 = document.createElement("td");
-        td500.textContent = dinheiro(saldo500);
-
-        const td700 = document.createElement("td");
-        td700.textContent = dinheiro(saldo700);
-
-        tr.append(tdSemana, td500, td700);
-
-        lista.appendChild(tr);
-    }
-
+/* PROJEÇÃO */
+function dinheiro(valor){
+return Number(valor||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 }
 
+function renderizarProjecao(){
+const lista=document.getElementById("listaProjecao");
+lista.innerHTML="";
+let saldo500=saldoAtual;
+let saldo700=saldoAtual;
+
+for(let semana=1;semana<=12;semana++){
+saldo500=(saldo500+500)*1.055;
+saldo700=(saldo700+700)*1.055;
+const dataSemana=new Date(dataInicio);
+dataSemana.setDate(dataSemana.getDate()+(semana-1)*7);
+const dataFormatada=dataSemana.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"});
+const tr=document.createElement("tr");
+const tdSemana=document.createElement("td");
+tdSemana.textContent=semana+"ª ("+dataFormatada+")";
+const td500=document.createElement("td");
+td500.textContent=dinheiro(saldo500);
+const td700=document.createElement("td");
+td700.textContent=dinheiro(saldo700);
+tr.append(tdSemana,td500,td700);
+lista.appendChild(tr);
+}
+}
 renderizarCalendario();
 
-/* FIREBASE E RELATÓRIO ORIGINAL */
+/* FIREBASE */
+const statusFirebase=document.getElementById("statusFirebase");
+const btnAtualizar=document.getElementById("btnAtualizar");
+const btnLimpar=document.getElementById("btnLimpar");
 
-const statusFirebase = document.getElementById("statusFirebase");
-const btnAtualizar = document.getElementById("btnAtualizar");
-const btnLimpar = document.getElementById("btnLimpar");
-
-function mostrarStatus(mensagem, erro = false) {
-    statusFirebase.textContent = mensagem;
-    statusFirebase.style.background = erro ? "#f8d7da" : "#d4edda";
-    statusFirebase.style.color = erro ? "#721c24" : "#155724";
+function mostrarStatus(mensagem,erro=false){
+statusFirebase.textContent=mensagem;
+statusFirebase.style.background=erro?"#f8d7da":"#d4edda";
+statusFirebase.style.color=erro?"#721c24":"#155724";
 }
 
-function bloquear(bloqueado) {
-    ocupado = bloqueado;
-    btnAtualizar.disabled = bloqueado || !carregado;
-    btnLimpar.disabled = bloqueado || !carregado;
+function bloquear(bloqueado){
+ocupado=bloqueado;
+btnAtualizar.disabled=bloqueado||!carregado;
+btnLimpar.disabled=bloqueado||!carregado;
 }
 
-function atualizarTela() {
-    document.getElementById("saldo_total").textContent =
-        dinheiro(saldoAtual);
-
-    renderizarProjecao();
+function atualizarTela(){
+document.getElementById("saldo_total").textContent=dinheiro(saldoAtual);
+renderizarProjecao();
 }
 
-function renderizarHistorico() {
-
-    const lista = document.getElementById("lista_historico");
-
-    lista.innerHTML = "";
-
-    if (historico.length === 0) {
-        lista.innerHTML =
-            '<div class="vazio">Nenhuma operação ainda</div>';
-        return;
-    }
-
-    historico.forEach(op => {
-
-        const item = document.createElement("div");
-        item.className = "item-hist";
-
-        const data = document.createElement("div");
-        data.className = "data";
-        data.textContent = "📅 " + (op.data || "");
-
-        const periodo = document.createElement("div");
-        periodo.textContent = "Período: " + (op.periodo || "");
-
-        const anterior = document.createElement("div");
-        anterior.textContent = "Saldo anterior: " + dinheiro(op.saldoAnterior);
-
-        const entrada = document.createElement("div");
-        entrada.textContent = "➕ Entrou: " + dinheiro(op.novoValor);
-
-        const lucro = document.createElement("div");
-        lucro.textContent = "📈 Rendeu: " + dinheiro(op.lucro);
-        lucro.style.color = "#e67700";
-
-        const retirada = document.createElement("div");
-        retirada.textContent = "💸 Retirou: " + dinheiro(op.retirado);
-
-        const novoSaldo = document.createElement("div");
-        novoSaldo.textContent = "➡️ Novo saldo: " + dinheiro(op.saldoNovo);
-        novoSaldo.style.color = "#27ae60";
-        novoSaldo.style.fontWeight = "bold";
-
-        item.append(data, periodo, anterior);
-
-        if (Number(op.novoValor) > 0) item.append(entrada);
-
-        item.append(lucro);
-
-        if (Number(op.retirado) > 0) item.append(retirada);
-
-        item.append(novoSaldo);
-
-        lista.append(item);
-    });
-
+function renderizarHistorico(){
+const lista=document.getElementById("lista_historico");
+lista.innerHTML="";
+if(historico.length===0){
+lista.innerHTML='<div class="vazio">Nenhuma operação ainda</div>';
+return;
 }
 
-async function salvarFirebase(novoSaldo, novoHistorico) {
+historico.forEach(op=>{
+const item=document.createElement("div");
+item.className="item-hist";
+const data=document.createElement("div");
+data.className="data";
+data.textContent="📅 "+(op.data||"");
+const periodo=document.createElement("div");
+periodo.textContent="Período: "+(op.periodo||"");
+const anterior=document.createElement("div");
+anterior.textContent="Saldo anterior: "+dinheiro(op.saldoAnterior);
+const entrada=document.createElement("div");
+entrada.textContent="➕ Entrou: "+dinheiro(op.novoValor);
+const lucro=document.createElement("div");
+lucro.textContent="📈 Rendeu: "+dinheiro(op.lucro);
+lucro.style.color="#e67700";
+const retirada=document.createElement("div");
+retirada.textContent="💸 Retirou: "+dinheiro(op.retirado);
+const novoSaldo=document.createElement("div");
+novoSaldo.textContent="➡️ Novo saldo: "+dinheiro(op.saldoNovo);
+novoSaldo.style.color="#27ae60";
+novoSaldo.style.fontWeight="bold";
 
-    await setDoc(documentoCaixa, {
-        saldoAtual: novoSaldo,
-        historico: novoHistorico,
-        atualizadoEm: new Date().toISOString()
-    });
-
+item.append(data,periodo,anterior);
+if(Number(op.novoValor)>0)item.append(entrada);
+item.append(lucro);
+if(Number(op.retirado)>0)item.append(retirada);
+item.append(novoSaldo);
+lista.append(item);
+});
 }
 
-async function carregarFirebase() {
-
-    try {
-
-        mostrarStatus("Aguarde, carregando Firebase...");
-
-        const snapshot = await getDoc(documentoCaixa);
-
-        if (snapshot.exists()) {
-
-            const dados = snapshot.data();
-
-            saldoAtual = Number(dados.saldoAtual) || 0;
-
-            historico = Array.isArray(dados.historico)
-                ? dados.historico
-                : [];
-
-        } else {
-
-            const saldoAntigo =
-                Number(localStorage.getItem("saldoAtual")) || 0;
-
-            let historicoAntigo = [];
-
-            try {
-                historicoAntigo =
-                    JSON.parse(localStorage.getItem("historico")) || [];
-            } catch {
-                historicoAntigo = [];
-            }
-
-            saldoAtual = saldoAntigo;
-
-            historico = Array.isArray(historicoAntigo)
-                ? historicoAntigo
-                : [];
-
-            await salvarFirebase(saldoAtual, historico);
-
-        }
-
-        carregado = true;
-
-        atualizarTela();
-        renderizarHistorico();
-
-        bloquear(false);
-
-        mostrarStatus("✓ Firebase conectado! Dados carregados.");
-
-    } catch (erro) {
-
-        console.error("Erro Firebase:", erro);
-
-        carregado = false;
-        bloquear(true);
-
-        mostrarStatus(
-            "Erro ao carregar Firebase: " +
-            (erro.code || erro.message || "Erro desconhecido"),
-            true
-        );
-
-        document.getElementById("lista_historico").innerHTML =
-            '<div class="vazio">Não foi possível carregar os dados.</div>';
-
-        document.getElementById("listaProjecao").innerHTML =
-            '<tr><td colspan="3">Não foi possível carregar a projeção.</td></tr>';
-
-    }
-
+async function salvarFirebase(novoSaldo,novoHistorico){
+await setDoc(documentoCaixa,{
+saldoAtual:novoSaldo,
+historico:novoHistorico,
+atualizadoEm:new Date().toISOString()
+});
 }
 
-window.atualizar = async function() {
+async function carregarFirebase(){
+try{
+mostrarStatus("Aguarde, carregando Firebase...");
+const snapshot=await getDoc(documentoCaixa);
 
-    if (!carregado || ocupado) return;
+if(snapshot.exists()){
+const dados=snapshot.data();
+saldoAtual=Number(dados.saldoAtual)||0;
+historico=Array.isArray(dados.historico)?dados.historico:[];
+}else{
+const saldoAntigo=Number(localStorage.getItem("saldoAtual"))||0;
+let historicoAntigo=[];
+try{
+historicoAntigo=JSON.parse(localStorage.getItem("historico"))||[];
+}catch{
+historicoAntigo=[];
+}
+saldoAtual=saldoAntigo;
+historico=Array.isArray(historicoAntigo)?historicoAntigo:[];
+await salvarFirebase(saldoAtual,historico);
+}
 
-    const periodo =
-        document.getElementById("periodo").value ||
-        new Date().toLocaleDateString("pt-BR", {
-            day: "2-digit",
-            month: "2-digit"
-        });
+carregado=true;
+atualizarTela();
+renderizarHistorico();
+bloquear(false);
+mostrarStatus("✓ Firebase conectado! Dados carregados.");
+}catch(erro){
+console.error("Erro Firebase:",erro);
+carregado=false;
+bloquear(true);
+mostrarStatus("Erro ao carregar Firebase: "+(erro.code||erro.message||"Erro desconhecido"),true);
+document.getElementById("lista_historico").innerHTML='<div class="vazio">Não foi possível carregar os dados.</div>';
+document.getElementById("listaProjecao").innerHTML='<tr><td colspan="3">Não foi possível carregar a projeção.</td></tr>';
+}
+}
 
-    const novoValor =
-        Number(document.getElementById("novo_valor").value) || 0;
+window.atualizar=async function(){
+if(!carregado||ocupado)return;
 
-    const retirado =
-        Number(document.getElementById("retirado").value) || 0;
+const periodo=document.getElementById("periodo").value||
+new Date().toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"});
+const novoValor=Number(document.getElementById("novo_valor").value)||0;
+const retirado=Number(document.getElementById("retirado").value)||0;
 
-    if (novoValor < 0 || retirado < 0) {
-        alert("Digite valores positivos.");
-        return;
-    }
+if(novoValor<0||retirado<0){
+alert("Digite valores positivos.");
+return;
+}
 
-    const baseCalculo = saldoAtual + novoValor;
-    const lucro = baseCalculo * 0.055;
-    const novoSaldo = baseCalculo + lucro - retirado;
+const baseCalculo=saldoAtual+novoValor;
+const lucro=baseCalculo*0.055;
+const novoSaldo=baseCalculo+lucro-retirado;
 
-    if (novoSaldo < 0) {
-        alert("A retirada não pode deixar o saldo negativo.");
-        return;
-    }
+if(novoSaldo<0){
+alert("A retirada não pode deixar o saldo negativo.");
+return;
+}
 
-    const operacao = {
-        data: new Date().toLocaleDateString("pt-BR"),
-        periodo: periodo,
-        saldoAnterior: saldoAtual,
-        novoValor: novoValor,
-        lucro: lucro,
-        retirado: retirado,
-        saldoNovo: novoSaldo
-    };
-
-    const novoHistorico = [operacao, ...historico];
-
-    bloquear(true);
-    mostrarStatus("Salvando operação no Firebase...");
-
-    try {
-
-        await salvarFirebase(novoSaldo, novoHistorico);
-
-        saldoAtual = novoSaldo;
-        historico = novoHistorico;
-
-        document.getElementById("rendeu").textContent =
-            dinheiro(lucro);
-
-        document.getElementById("novo_valor").value = "";
-        document.getElementById("retirado").value = "";
-        document.getElementById("periodo").value = "";
-
-        atualizarTela();
-        renderizarHistorico();
-
-        mostrarStatus("✓ Operação salva no Firebase!");
-
-    } catch (erro) {
-
-        console.error("Erro ao salvar:", erro);
-
-        mostrarStatus(
-            "Erro ao salvar: " + (erro.code || erro.message),
-            true
-        );
-
-        alert("Não foi possível salvar. Seus dados na tela não foram alterados.");
-
-    } finally {
-
-        bloquear(false);
-
-    }
-
+const operacao={
+data:new Date().toLocaleDateString("pt-BR"),
+periodo:periodo,
+saldoAnterior:saldoAtual,
+novoValor:novoValor,
+lucro:lucro,
+retirado:retirado,
+saldoNovo:novoSaldo
 };
 
-window.limparHistorico = async function() {
+const novoHistorico=[operacao,...historico];
+bloquear(true);
+mostrarStatus("Salvando operação no Firebase...");
 
-    if (!carregado || ocupado) return;
+try{
+await salvarFirebase(novoSaldo,novoHistorico);
+saldoAtual=novoSaldo;
+historico=novoHistorico;
+document.getElementById("rendeu").textContent=dinheiro(lucro);
+document.getElementById("novo_valor").value="";
+document.getElementById("retirado").value="";
+document.getElementById("periodo").value="";
+atualizarTela();
+renderizarHistorico();
+mostrarStatus("✓ Operação salva no Firebase!");
+}catch(erro){
+console.error("Erro ao salvar:",erro);
+mostrarStatus("Erro ao salvar: "+(erro.code||erro.message),true);
+alert("Não foi possível salvar. Seus dados na tela não foram alterados.");
+}finally{
+bloquear(false);
+}
+};
 
-    if (!confirm("Tem certeza que quer apagar todo o histórico e zerar o saldo?")) {
-        return;
-    }
+/* LIMPAR HISTÓRICO COM SENHA */
+window.limparHistorico=async function(){
+if(!carregado||ocupado)return;
 
-    bloquear(true);
-    mostrarStatus("Limpando dados no Firebase...");
+const senha=prompt("Digite a senha para limpar o histórico:");
+if(senha===null)return;
 
-    try {
+if(senha!=="lucio"){
+alert("Senha incorreta. O histórico não foi apagado.");
+return;
+}
 
-        await salvarFirebase(0, []);
+if(!confirm("Tem certeza que quer apagar todo o histórico e zerar o saldo?")){
+return;
+}
 
-        saldoAtual = 0;
-        historico = [];
+bloquear(true);
+mostrarStatus("Limpando dados no Firebase...");
 
-        document.getElementById("rendeu").textContent = "R$ 0,00";
-
-        atualizarTela();
-        renderizarHistorico();
-
-        mostrarStatus("✓ Histórico apagado e saldo zerado.");
-
-    } catch (erro) {
-
-        console.error("Erro ao limpar:", erro);
-
-        mostrarStatus(
-            "Erro ao limpar: " + (erro.code || erro.message),
-            true
-        );
-
-    } finally {
-
-        bloquear(false);
-
-    }
-
+try{
+await salvarFirebase(0,[]);
+saldoAtual=0;
+historico=[];
+document.getElementById("rendeu").textContent="R$ 0,00";
+atualizarTela();
+renderizarHistorico();
+mostrarStatus("✓ Histórico apagado e saldo zerado.");
+}catch(erro){
+console.error("Erro ao limpar:",erro);
+mostrarStatus("Erro ao limpar: "+(erro.code||erro.message),true);
+}finally{
+bloquear(false);
+}
 };
 
 carregarFirebase();
-
 </script>
-
 </body>
 </html>
